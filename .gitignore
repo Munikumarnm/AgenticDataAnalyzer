@@ -1,0 +1,14 @@
+.venv/
+agentic/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+*.db
+.streamlit/
+.claude/
+.env
+*.egg-info/
+dist/
+build/
