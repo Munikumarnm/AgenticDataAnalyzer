@@ -24,7 +24,14 @@ from backend.database import get_schema, run_query
 load_dotenv()
 
 # ── LLM setup — supports both google-genai (new) and google-generativeai (old) ─
+# Read from env first, then fall back to st.secrets (Streamlit Cloud)
 _KEY: str = os.getenv("GEMINI_API_KEY", "")
+if not _KEY:
+    try:
+        import streamlit as _st
+        _KEY = _st.secrets.get("GEMINI_API_KEY", "")
+    except Exception:
+        pass
 _MODEL = "gemini-2.5-flash"
 _client = None          # new SDK  (google-genai)
 _legacy_model = None    # old SDK  (google-generativeai)
